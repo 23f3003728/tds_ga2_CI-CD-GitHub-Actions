@@ -1,0 +1,19 @@
+name: Cache dependencies and prime cache
+
+on: [push, workflow_dispatch]
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: .venv  # or node_modules or something else—edit as needed
+          key: cache-bfb03a1
+
+      - name: prime-cache-bfb03a1
+        run: echo "Cache result: ${{ steps.cache.outputs.cache-hit }}"
